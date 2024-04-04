@@ -68,8 +68,11 @@ def calculate_nutrition_plan(name):
     client = next((c for c in clients if c.name == name), None)
     if client is not None:
         # Calculate nutrition plan for the client
-        # You can include your existing nutrition calculation logic here
-        calculate_nutrition(client)
+        # Ask for additional parameters
+        protein_percentage = float(input("Enter the protein percentage: "))
+        carbohydrates_percentage = float(input("Enter the carbohydrates percentage: "))
+        calorie_deficiency = float(input("Enter the calorie deficiency amount: "))
+        calculate_nutrition(client, protein_percentage, carbohydrates_percentage, calorie_deficiency)
     else:
         print(f"Client '{name}' not found in the database.")
 

@@ -1,4 +1,4 @@
-def calculate_nutrition(client):
+def calculate_nutrition(client, protein_percentage, carbohydrates_percentage, calorie_deficiency):
     # Unpack client data
     name = client.name
     age = client.age
@@ -31,18 +31,19 @@ def calculate_nutrition(client):
     # Calculate TDEE
     TDEE = activity_index * BMR
     
-    # Calculate daily calories based on goal
+    # Adjust daily calories based on calorie deficiency
     if goal == 'lose':
-        daily_calory = TDEE - 500
+        daily_calory = TDEE - calorie_deficiency
     elif goal == 'gain':
-        daily_calory = TDEE + 500
+        daily_calory = TDEE + calorie_deficiency
     else:
         daily_calory = TDEE
     
     # Calculate macronutrients
-    proteins = daily_calory * 0.2 / 4
-    carbs = daily_calory * 0.5 / 4
-    fat = daily_calory * 0.3 / 9
+    proteins = daily_calory * 0.01*protein_percentage / 4
+    carbs = daily_calory * 0.01*carbohydrates_percentage / 4
+    fat = daily_calory * 0.01*(100 - protein_percentage - carbohydrates_percentage) / 9
+
     
     # Print nutrition plan
     print()
